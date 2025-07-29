@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chat with Bot</title>
+  <style>
+    body {
+      background: #f0f2f5;
+      font-family: 'Helvetica Neue', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .chat-container {
+      max-width: 600px;
+      margin: 50px auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      padding: 20px;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 22px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    #chat {
+      height: 300px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 8px;
+      background-color: #fafafa;
+    }
+
+    .user {
+      text-align: right;
+      color: #007bff;
+      margin: 8px 0;
+    }
+
+    .bot {
+      text-align: left;
+      color: #28a745;
+      margin: 8px 0;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="title">🤖 Smart Chat (EN/AR)</div>
+    <div id="chat"></div>
+    <input
+      type="text"
+      id="input"
+      placeholder="Type your message or اكتب رسالتك..."
+      onkeypress="handleKey(event)"
+    />
+  </div>
+
+  <script>
+    function handleKey(e) {
+      if (e.key === "Enter") sendMessage();
+    }
+
+    function sendMessage() {
+      const input = document.getElementById("input");
+      const chat = document.getElementById("chat");
+      const message = input.value.trim();
+      if (!message) return;
+
+      chat.innerHTML += `<div class="user">You: ${message}</div>`;
+
+      let msg = message.toLowerCase();
+      let reply = "";
+
+      if (msg.includes("hello") || msg.includes("مرحبا")) {
+        reply = "Hello! أهلاً وسهلاً بك 😊";
+      } else if (msg.includes("how are you") || msg.includes("كيف حالك")) {
+        reply = "I'm great, thank you! بخير ولله الحمد 🌼";
+      } else if (msg.includes("name") || msg.includes("اسمك")) {
+        reply = "My name is Bot! اسمي بوت 🤖";
+      } else if (msg.includes("bye") || msg.includes("مع السلامة")) {
+        reply = "Goodbye! Have a great day! إلى اللقاء 👋";
+      } else if (msg.includes("weather") || msg.includes("الجو")) {
+        reply = "The weather? I hope it's sunny wherever you are! الجو؟ أتمنى أن يكون مشمسًا ☀️";
+      } else if (msg.includes("thanks") || msg.includes("شكرا")) {
+        reply = "You're welcome! على الرحب والسعة 🌷";
+      } else {
+        reply = "Tell me more... قل لي أكثر...";
+      }
+
+      chat.innerHTML += `<div class="bot">Bot: ${reply}</div>`;
+      chat.scrollTop = chat.scrollHeight;
+      input.value = "";
+    }
+  </script>
+</body>
+</html>
